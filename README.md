@@ -77,7 +77,7 @@ print("RMSE : ",rmse)
 ## Training set:
 ![Screenshot 2024-02-27 091249](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/2b4dea9c-c228-49fd-b431-968b35069728)
 
-## Error:
+## Values of MSE,MAE,RMSE:
 ![Screenshot 2024-02-27 091302](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/82c301d2-859f-4b90-a9b1-d1befc4d366d)
 
 
