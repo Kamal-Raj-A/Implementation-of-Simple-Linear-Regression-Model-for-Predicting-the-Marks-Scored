@@ -26,46 +26,58 @@ To write a program to predict the marks scored by a student using the simple lin
 ```
 /*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by: KAMAL RAJ A
-RegisterNumber: 212223040082
-
+Developed by: A. KAMAL RAJ
+RegisterNumber:  212223040082
+*/
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-df=pd.read_csv('/content/ml - Sheet1.csv')
-df.head(10)
-
-plt.scatter(df['X'],df['Y'])
-plt.xlabel('X')
-plt.ylabel('Y')
-
-x=df.iloc[:,0:1]
-y=df.iloc[:,-1]
-
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+df=pd.read_csv("student_scores.csv")
+df.head()
+df.tail()
+X=df.iloc[:,:-1].values
+print(X)
+Y=df.iloc[:,-1].values
+print(Y)
 from sklearn.model_selection import train_test_split
-X_train,X_test,Y_train,Y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
 
 from sklearn.linear_model import LinearRegression
-
-lr=LinearRegression()
-lr.fit(X_train,Y_train)
-
-X_train
-Y_train
-
-lr.predict(X_test.iloc[0].values.reshape(1,1))
-
-plt.scatter(df['X'],df['Y'])
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.plot(X_train,lr.predict(X_train),color='red')
-*/  
-*/
+regressor=LinearRegression()
+regressor.fit(X_train,Y_train)
+Y_pred=regressor.predict(X_test)
+print(Y_pred)
+print(Y_test)
+plt.scatter(X_train,Y_train,color="orange")
+plt.plot(X_train,regressor.predict(X_train),color="red")
+plt.title("Hours vs scores(Training Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+plt.scatter(X_test,Y_test,color="orange")
+plt.plot(X_test,regressor.predict(X_test),color="red")
+plt.title("Hours vs scores(Test Data Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+mse=mean_squared_error(Y_test,Y_pred)
+print("MSE = ",mse)
+mae=mean_absolute_error(Y_test,Y_pred)
+print("MAE = ",mae)
+rmse=np.sqrt(mse)
+print("RMSE : ",rmse)
 ```
 
 ## Output:
-![ML EX-2](https://github.com/Kalpanareshma/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/122040453/717cdca0-1e8b-43b4-8299-dbad631ec737)
+## Dataset:
+![Screenshot 2024-02-27 091256](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/ebb9d4dd-30cb-4c67-b4a8-bdbd99a95a58)
+## Training set:
+![Screenshot 2024-02-27 091249](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/2b4dea9c-c228-49fd-b431-968b35069728)
+## Y predicted:
+![Screenshot 2024-02-27 091329](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/2e68e69d-300a-44d3-9a76-c47e81df756c)
+## Error:
+![Screenshot 2024-02-27 091302](https://github.com/Kamal-Raj-A/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/145742556/82c301d2-859f-4b90-a9b1-d1befc4d366d)
 
 
 
